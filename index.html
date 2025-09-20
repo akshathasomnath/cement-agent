@@ -43,7 +43,7 @@
     outputDiv.innerHTML = '<p>Loading predictions...</p>';
 
     try {
-      const response = await fetch('https://adk-default-service-name-112091879413.us-central1.run.app', {
+      const response = await fetch('https://master-agent-112091879413.us-central1.run.app/v1', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ input: inputData })
