@@ -8,7 +8,7 @@ ENDPOINT_ID = "7614631494278971392"
 aiplatform.init(project=PROJECT_ID, location=REGION)
 endpoint = aiplatform.Endpoint(endpoint_name=ENDPOINT_ID)
 
-def predict_fuel(
+def predict_optimization(
     feed_rate: float,
     kiln_temp: float,
     fuel_type: str,
@@ -33,8 +33,9 @@ def predict_fuel(
         return {"error": str(e)}
 
 root_agent = Agent(
-    name="fuel_agent",
+    name="optimization_agent",
     model="gemini-2.5-flash",
-    description="Optimize fuel usage and thermal substitution rate",
-    instruction="Use the function to predict fuel optimization / TSR.",
+    description="Autonomous cement plant optimization combining all parameters",
+    instruction="Use the function to predict cement plant optimization.",
+   
 )
