@@ -8,7 +8,7 @@ ENDPOINT_ID = "7614631494278971392"
 aiplatform.init(project=PROJECT_ID, location=REGION)
 endpoint = aiplatform.Endpoint(endpoint_name=ENDPOINT_ID)
 
-def predict_clinker(
+def predict_fuel(
     feed_rate: float,
     kiln_temp: float,
     fuel_type: str,
@@ -17,7 +17,6 @@ def predict_clinker(
     residue: float,
     quality: float
 ) -> dict:
-    #"""Predict clinker parameters from input values using Vertex AI."""
     try:
         instance = {
             "feed_rate": feed_rate,
@@ -29,13 +28,13 @@ def predict_clinker(
             "quality": quality
         }
         response = endpoint.predict([instance])
-        return {"clinker_prediction": response.predictions}
+        return {"prediction": response.predictions}
     except Exception as e:
         return {"error": str(e)}
 
 root_agent = Agent(
-    name="clinker_agent",
+    name="fuel_agent",
     model="gemini-2.5-flash",
-    description="Predict clinker parameters for optimal kiln operation",
-    instruction="Use predict_clinker to analyze input parameters and return clinker predictions."
+    description="Optimize fuel usage and thermal substitution rate",
+    instruction="Use the function to predict fuel optimization / TSR.",
 )
