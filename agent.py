@@ -3,19 +3,19 @@ from google.cloud import aiplatform
 
 PROJECT_ID = "glossy-observer-425809-e5"
 REGION = "us-central1"
-ENDPOINT_ID = "7614631494278971392"
+ENDPOINT_ID = "7614631494278971392"  
+
 
 aiplatform.init(project=PROJECT_ID, location=REGION)
 endpoint = aiplatform.Endpoint(endpoint_name=ENDPOINT_ID)
 
-def predict_raw_material(
+def predict_quality(
     feed_rate: float,
     kiln_temp: float,
     fuel_type: str,
     power_kwh_per_ton: float,
     fineness: float,
-    residue: float,
-    quality: float
+    residue: float
 ) -> dict:
     try:
         instance = {
@@ -25,16 +25,18 @@ def predict_raw_material(
             "power_kwh_per_ton": power_kwh_per_ton,
             "fineness": fineness,
             "residue": residue,
-            "quality": quality
         }
         response = endpoint.predict([instance])
-        return {"prediction": response.predictions}
+
+        prediction = response.predictions[0]  
+        return {"input": instance, "predicted_quality": prediction}
     except Exception as e:
         return {"error": str(e)}
 
+
 root_agent = Agent(
-    name="raw_material_agent",
+    name="quality_agent",
     model="gemini-2.5-flash",
-    description="Predict optimal raw material mix and grinding efficiency",
-    instruction="Use the function to predict raw material optimization.",
+    description="Cement Quality Prediction Agent",
+    instruction="Use the function to predict cement quality based on process parameters.",
 )
