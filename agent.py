@@ -8,7 +8,7 @@ ENDPOINT_ID = "7614631494278971392"
 aiplatform.init(project=PROJECT_ID, location=REGION)
 endpoint = aiplatform.Endpoint(endpoint_name=ENDPOINT_ID)
 
-def predict_optimization(
+def predict_raw_material(
     feed_rate: float,
     kiln_temp: float,
     fuel_type: str,
@@ -33,9 +33,8 @@ def predict_optimization(
         return {"error": str(e)}
 
 root_agent = Agent(
-    name="optimization_agent",
+    name="raw_material_agent",
     model="gemini-2.5-flash",
-    description="Autonomous cement plant optimization combining all parameters",
-    instruction="Use the function to predict cement plant optimization.",
-   
+    description="Predict optimal raw material mix and grinding efficiency",
+    instruction="Use the function to predict raw material optimization.",
 )
