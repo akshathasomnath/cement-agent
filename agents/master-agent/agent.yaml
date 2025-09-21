@@ -1,0 +1,2 @@
+name: master-agent
+entrypoint: agent/root_agent.py

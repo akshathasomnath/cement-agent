@@ -1,0 +1,5 @@
+
+fastapi
+uvicorn[standard]
+#adk>=0.0.5
+google-cloud-aiplatform>=1.29.0
