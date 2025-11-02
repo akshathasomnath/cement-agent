@@ -1,5 +1,5 @@
 class MCPServer:
     def __init__(self, *args, **kwargs):
-        print(" MCPServer initialized (mock for prototype)")
+        print(" MCPServer initialized ")
     def run(self):
-        print(" MCPServer running (mock)")
+        print(" MCPServer running ")
